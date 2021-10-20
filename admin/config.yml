@@ -1,0 +1,914 @@
+backend:
+  name: git-gateway
+  accept_roles:
+    - admin
+    - editor
+media_folder: theme/assets/images
+public_folder: /assets/images
+collections:
+  - name: pages
+    label: Pages
+    identifier_field: title
+    extension: md
+    create: false
+    delete: false
+    slug: '{{slug}}'
+    editor:
+      preview: false
+    folder: cms/pages
+    fields:
+      - label: Title
+        name: title
+        widget: string
+      - label: Publish Date
+        name: date
+        widget: datetime
+      - label: Layout
+        widget: hidden
+        name: layout
+        default: '{{slug}}.html'
+      - &ref_0
+        label: Seo
+        name: seo
+        widget: object
+        collapsed: true
+        fields:
+          - label: Title
+            name: title
+            widget: string
+            required: false
+          - label: Description
+            name: description
+            widget: string
+            required: false
+          - label: No index
+            name: noindex
+            widget: boolean
+            default: false
+            required: false
+          - label: Open Graph Title
+            name: og:title
+            widget: string
+            required: false
+          - label: Open Graph Image
+            name: og:image
+            widget: image
+            required: false
+            media_library:
+              config:
+                multiple: false
+          - label: Twitter Title
+            name: twitter:title
+            widget: string
+            default: summary
+            required: false
+          - label: Twitter Card
+            name: twitter:card
+            widget: string
+            default: summary
+            required: false
+          - label: Twitter Site
+            name: twitter:site
+            widget: string
+            required: false
+          - label: Twitter Creator
+            name: twitter:creator
+            widget: string
+            required: false
+          - label: Additional HTML tags
+            name: additional_tags
+            widget: text
+            required: false
+  - name: evaluaciones
+    label: Evaluaciones
+    folder: cms/evaluaciones
+    create: true
+    identifier_field: name
+    extension: md
+    slug: '{{slug}}'
+    fields:
+      - hint: ''
+        name: title
+        label: Name
+        widget: string
+        required: true
+      - hint: ''
+        name: created-on
+        label: Created On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: updated-on
+        label: Updated On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: published-on
+        label: Published On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: f_link-formulario
+        label: Link formulario
+        widget: string
+        required: false
+      - hint: ''
+        name: f_imagen-406px-ancho-jpg
+        label: Imagen 406px ancho JPG
+        widget: object
+        required: false
+        fields:
+          - hint: ''
+            name: url
+            label: Image
+            widget: image
+            required: false
+            allow_multiple: false
+          - hint: Image Alt
+            name: alt
+            label: alt
+            widget: string
+            required: false
+      - hint: ''
+        name: f_texto
+        label: Texto
+        widget: string
+        required: false
+      - label: Tags
+        widget: hidden
+        name: tags
+        default: evaluaciones
+      - label: Layout
+        widget: hidden
+        name: layout
+        default: '[evaluaciones].html'
+      - label: Publish Date
+        name: date
+        widget: datetime
+      - *ref_0
+    editor:
+      preview: false
+  - name: proximos_cursos
+    label: Proximos cursos
+    folder: cms/proximos-cursos
+    create: true
+    identifier_field: name
+    extension: md
+    slug: '{{slug}}'
+    fields:
+      - hint: ''
+        name: title
+        label: Name
+        widget: string
+        required: true
+      - hint: ''
+        name: created-on
+        label: Created On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: updated-on
+        label: Updated On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: published-on
+        label: Published On
+        widget: datetime
+        required: false
+      - label: Contenido
+        name: body
+        widget: markdown
+        required: false
+      - hint: ''
+        name: f_fonde-de-imagen
+        label: Fonde de imagen
+        widget: object
+        required: false
+        fields:
+          - hint: ''
+            name: url
+            label: Image
+            widget: image
+            required: false
+            allow_multiple: false
+          - hint: Image Alt
+            name: alt
+            label: alt
+            widget: string
+            required: false
+      - hint: ''
+        name: f_fecha-2
+        label: Fecha
+        widget: string
+        required: false
+      - hint: ''
+        name: f_horario
+        label: Horario
+        widget: string
+        required: false
+      - hint: ''
+        name: f_ponente
+        label: Ponente
+        widget: string
+        required: false
+      - label: Tags
+        widget: hidden
+        name: tags
+        default: proximos_cursos
+      - label: Layout
+        widget: hidden
+        name: layout
+        default: '[proximos-cursos].html'
+      - label: Publish Date
+        name: date
+        widget: datetime
+      - *ref_0
+    editor:
+      preview: false
+  - name: cursos
+    label: Cursos
+    folder: cms/cursos
+    create: true
+    identifier_field: name
+    extension: md
+    slug: '{{slug}}'
+    fields:
+      - hint: ''
+        name: title
+        label: Name
+        widget: string
+        required: true
+      - hint: ''
+        name: created-on
+        label: Created On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: updated-on
+        label: Updated On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: published-on
+        label: Published On
+        widget: datetime
+        required: false
+      - label: Contenido
+        name: body
+        widget: markdown
+        required: false
+      - hint: JPG no mayor a 1200px
+        name: f_fondo-de-imagen
+        label: Fondo de imagen
+        widget: object
+        required: false
+        fields:
+          - hint: ''
+            name: url
+            label: Image
+            widget: image
+            required: false
+            allow_multiple: false
+          - hint: Image Alt
+            name: alt
+            label: alt
+            widget: string
+            required: false
+      - hint: ''
+        name: f_fecha
+        label: Fecha
+        widget: string
+        required: false
+      - hint: ''
+        name: f_horario
+        label: Horario
+        widget: string
+        required: false
+      - hint: ''
+        name: f_ponente
+        label: Ponente
+        widget: text
+        required: false
+      - label: Tags
+        widget: hidden
+        name: tags
+        default: cursos
+      - label: Layout
+        widget: hidden
+        name: layout
+        default: '[cursos].html'
+      - label: Publish Date
+        name: date
+        widget: datetime
+      - *ref_0
+    editor:
+      preview: false
+  - label: Theme Settings
+    name: settings
+    identifier_field: title
+    extension: json
+    create: false
+    delete: false
+    slug: '{{slug}}'
+    editor:
+      preview: false
+    files:
+      - label: General
+        name: site
+        file: cms/_data/settings/site.json
+        fields:
+          - label: Title
+            name: title
+            widget: hidden
+            default: General
+          - hint: Full domain url (needed for a correct sitemap file)
+            name: domain
+            label: Domain
+            widget: string
+            required: false
+          - name: favicon
+            label: Favicon
+            widget: image
+            allow_multiple: false
+            required: false
+          - name: apple_touch_icon
+            label: Apple Touch Icon
+            widget: image
+            allow_multiple: false
+            required: false
+          - name: header_additional_content
+            label: Additional Content Header
+            hint: Content here will be placed before </head> tag
+            widget: text
+            required: false
+          - name: footer_additional_content
+            label: Additional Content Footer
+            hint: Content here will be placed before </body> tag
+            widget: text
+            required: false
+          - name: images_optimization
+            label: Images Optimization
+            widget: object
+            collapsed: false
+            fields:
+              - label: Image Formats
+                name: formats
+                widget: select
+                multiple: true
+                options:
+                  - label: Avif
+                    value: avif
+                  - label: Webp
+                    value: webp
+              - label: Image Dimensions
+                name: dimensions
+                widget: select
+                multiple: true
+                options:
+                  - label: '500'
+                    value: 500
+                  - label: '800'
+                    value: 800
+                  - label: '1080'
+                    value: 1080
+                  - label: '1600'
+                    value: 1600
+                  - label: '2000'
+                    value: 2000
+                  - label: '2600'
+                    value: 2600
+      - label: Colors
+        name: colors
+        file: cms/_data/colors.json
+        fields:
+          - label: Title
+            name: title
+            widget: hidden
+            default: Colors
+      - label: Texts
+        name: texts
+        file: cms/_data/texts.json
+        fields:
+          - label: Title
+            name: title
+            widget: hidden
+            default: Texts
+          - hint: 'Original text: Evalúa a tu OSC, key: 383a287c'
+            label: Text
+            name: 383a287c
+            widget: string
+          - hint: 'Original text: Oferta de capacitación, key: 789e4dd3'
+            label: Text
+            name: 789e4dd3
+            widget: string
+          - hint: 'Original text: Acceso a cursos, key: 6f0e6a96'
+            label: Text
+            name: 6f0e6a96
+            widget: string
+          - hint: 'Original text: Contacto, key: -1df83b91'
+            label: Text
+            name: '-1df83b91'
+            widget: string
+          - hint: 'Original text: Programa de capacitación, key: -24944e01'
+            label: Text
+            name: '-24944e01'
+            widget: string
+          - hint: 'Original text: constante, key: -192b6ebf'
+            label: Text
+            name: '-192b6ebf'
+            widget: string
+          - hint: >-
+              Original text: Iniciativa de Corporativa de Fundaciones para la
+              capacitación constante para las organizaciones, key: -5908bfaf
+            label: Text
+            name: '-5908bfaf'
+            widget: text
+          - hint: 'Original text: Ver oferta de capacitación, key: -71b54910'
+            label: Text
+            name: '-71b54910'
+            widget: string
+          - hint: >-
+              Original text: Capacitaciones abiertas de inscripción, key:
+              -2ce4e3b6
+            label: Text
+            name: '-2ce4e3b6'
+            widget: string
+          - hint: 'Original text: No hay elementos, key: -6a49d39f'
+            label: Text
+            name: '-6a49d39f'
+            widget: string
+          - hint: 'Original text: Próximas capacitaciones, key: 62de1178'
+            label: Text
+            name: 62de1178
+            widget: string
+          - hint: 'Original text: Próximas capacitaciones programadas, key: -46d1de8f'
+            label: Text
+            name: '-46d1de8f'
+            widget: string
+          - hint: 'Original text: No hay capacitaciones programadas, key: 22b42b6d'
+            label: Text
+            name: 22b42b6d
+            widget: string
+          - hint: 'Original text: Mantente informado, key: -4819e29'
+            label: Text
+            name: '-4819e29'
+            widget: string
+          - hint: >-
+              Original text: Te enviaremos información relevante de próximas
+              capacitaciones, key: 75a95170
+            label: Text
+            name: 75a95170
+            widget: string
+          - hint: 'Original text: Una iniciativa de , key: 70f92d2e'
+            label: Text
+            name: 70f92d2e
+            widget: string
+          - hint: 'Original text: Corporativa de Fundaciones AC, key: -3aa62e5a'
+            label: Text
+            name: '-3aa62e5a'
+            widget: string
+          - hint: 'Original text: Aviso de privacidad, key: -3054c602'
+            label: Text
+            name: '-3054c602'
+            widget: string
+          - hint: 'Original text: Acceso a plataforma de aprendizaje, key: 6ae6076a'
+            label: Text
+            name: 6ae6076a
+            widget: string
+          - hint: >-
+              Original text: Para ingresar a la plataforma se requiere estar
+              previamente registrado en el curso e ingresar con un correo de
+              Google., key: 385f310a
+            label: Text
+            name: 385f310a
+            widget: text
+          - hint: >-
+              Original text: Si no cuentas con un correo lo puedes abrir en ,
+              key: -6e0085ab
+            label: Text
+            name: '-6e0085ab'
+            widget: string
+          - hint: 'Original text: este link, key: -30371c25'
+            label: Text
+            name: '-30371c25'
+            widget: string
+          - hint: 'Original text: Acceso a plataforma, key: 7de96c0a'
+            label: Text
+            name: 7de96c0a
+            widget: string
+          - hint: 'Original text: Abrir correo de Google, key: 3a9092b4'
+            label: Text
+            name: 3a9092b4
+            widget: string
+          - hint: >-
+              Original text: Si no estas inscrito puedes conocer nuestra oferta
+              en , key: -2de01cb7
+            label: Text
+            name: '-2de01cb7'
+            widget: string
+          - hint: 'Original text: nuestra oferta de capacitación, key: -524c82bb'
+            label: Text
+            name: '-524c82bb'
+            widget: string
+          - hint: >-
+              Original text: Nos encantará escucharte. Favor de llenar el
+              siguiente formulario, key: 6adb795f
+            label: Text
+            name: 6adb795f
+            widget: string
+          - hint: 'Original text: Nombre y apellido:, key: 1ada927e'
+            label: Text
+            name: 1ada927e
+            widget: string
+          - hint: 'Original text: Correo electrónico, key: -5f41cbb3'
+            label: Text
+            name: '-5f41cbb3'
+            widget: string
+          - hint: 'Original text: Mensaje:, key: -2038caa5'
+            label: Text
+            name: '-2038caa5'
+            widget: string
+          - hint: 'Original text: Gracias, hemos recibido tu mensaje, key: 329ae967'
+            label: Text
+            name: 329ae967
+            widget: string
+          - hint: >-
+              Original text: Oops! Something went wrong while submitting the
+              form., key: -7c112e99
+            label: Text
+            name: '-7c112e99'
+            widget: string
+          - hint: 'Original text: Más información, key: 1b4c8cf8'
+            label: Text
+            name: 1b4c8cf8
+            widget: string
+          - hint: 'Original text: Inscríbete aquí, key: -5a179bdc'
+            label: Text
+            name: '-5a179bdc'
+            widget: string
+          - hint: 'Original text: Nombre:, key: -1e41be8f'
+            label: Text
+            name: '-1e41be8f'
+            widget: string
+          - hint: 'Original text: Apellido paterno:, key: -69954315'
+            label: Text
+            name: '-69954315'
+            widget: string
+          - hint: 'Original text: Apellido materno:, key: 5ec7364e'
+            label: Text
+            name: 5ec7364e
+            widget: string
+          - hint: 'Original text: Teléfono:, key: -79293a5e'
+            label: Text
+            name: '-79293a5e'
+            widget: string
+          - hint: 'Original text: Cargo en la organización, key: 2bc32538'
+            label: Text
+            name: 2bc32538
+            widget: string
+          - hint: 'Original text: Nombre completo de la Organización, key: 7f56872'
+            label: Text
+            name: 7f56872
+            widget: string
+          - hint: 'Original text: Específica , key: -3852af6e'
+            label: Text
+            name: '-3852af6e'
+            widget: string
+          - hint: 'Original text: Entidad Federativa, key: 739ef2e6'
+            label: Text
+            name: 739ef2e6
+            widget: string
+          - hint: 'Original text:  de tu OSC, key: -2705bee1'
+            label: Text
+            name: '-2705bee1'
+            widget: string
+          - hint: 'Original text: ¿Requieres factura?, key: 2b9138d9'
+            label: Text
+            name: 2b9138d9
+            widget: string
+          - hint: 'Original text: No, key: 9e1'
+            label: Text
+            name: '9e1'
+            widget: string
+          - hint: 'Original text: Si, key: a76'
+            label: Text
+            name: a76
+            widget: string
+          - hint: 'Original text: Nombre o Razón Social:, key: 5082572b'
+            label: Text
+            name: 5082572b
+            widget: string
+          - hint: 'Original text: RFC:, key: 26558b'
+            label: Text
+            name: 26558b
+            widget: string
+          - hint: 'Original text: Calle y número:, key: -44b1e5a7'
+            label: Text
+            name: '-44b1e5a7'
+            widget: string
+          - hint: 'Original text: Colonia:, key: -21a2657d'
+            label: Text
+            name: '-21a2657d'
+            widget: string
+          - hint: 'Original text: Código Postal:, key: 71e250cc'
+            label: Text
+            name: 71e250cc
+            widget: string
+          - hint: 'Original text: Ciudad y , key: 46a70b6f'
+            label: Text
+            name: 46a70b6f
+            widget: string
+          - hint: 'Original text: Estado, key: 7c492586'
+            label: Text
+            name: 7c492586
+            widget: string
+          - hint: 'Original text: :, key: 3a'
+            label: Text
+            name: 3a
+            widget: string
+          - hint: 'Original text: Registro, key: -25496bad'
+            label: Text
+            name: '-25496bad'
+            widget: string
+          - hint: 'Original text: Cerrar ventana, key: -671f702e'
+            label: Text
+            name: '-671f702e'
+            widget: string
+          - hint: 'Original text: Evalúa tu OSC, key: -20c91ce3'
+            label: Text
+            name: '-20c91ce3'
+            widget: string
+          - hint: "Original text: Es\_nuestro compromiso\_brindar un acompañamiento integral a las organizaciones de la sociedad civil (OSC) que participan en nuestro programa de fortalecimiento. Por eso adaptamos 3 herramientas de diagnóstico, que nos ayudan a identificar las áreas de oportunidad de la organización y priorizar temas del proceso de fortalecimiento., key: -25b5e664"
+            label: Text
+            name: '-25b5e664'
+            widget: text
+          - hint: >-
+              Original text: Cada herramienta es distinta, te pedimos elegir una
+              sola de ellas dependiendo el tipo de información que deseas
+              obtener., key: 1801f645
+            label: Text
+            name: 1801f645
+            widget: text
+          - hint: 'Original text: Evaluaciones, key: 510267b'
+            label: Text
+            name: 510267b
+            widget: string
+          - hint: 'Original text: Formulario de diagnóstico, key: -356315ad'
+            label: Text
+            name: '-356315ad'
+            widget: string
+          - hint: 'Original text: ¡Gracias!, key: 482e04b4'
+            label: Text
+            name: 482e04b4
+            widget: string
+          - hint: 'Original text: Hemos recibido tu información, key: 61efb4c3'
+            label: Text
+            name: 61efb4c3
+            widget: string
+          - hint: 'Original text: Volver al inicio, key: 2e5639ea'
+            label: Text
+            name: 2e5639ea
+            widget: string
+          - hint: >-
+              Original text: Thank you! Your submission has been received!, key:
+              5a0ea5a1
+            label: Text
+            name: 5a0ea5a1
+            widget: string
+      - label: Links
+        name: links
+        file: cms/_data/links.json
+        fields:
+          - label: Title
+            name: title
+            widget: hidden
+            default: Links
+          - hint: 'Original link: /, key: 2f'
+            label: Link
+            name: 2f
+            widget: string
+          - hint: 'Original link: /evalua-tu-osc, key: -30868cd7'
+            label: Link
+            name: '-30868cd7'
+            widget: string
+          - hint: 'Original link: /oferta, key: 797bcf20'
+            label: Link
+            name: 797bcf20
+            widget: string
+          - hint: 'Original link: /acceso, key: 616c964f'
+            label: Link
+            name: 616c964f
+            widget: string
+          - hint: 'Original link: https://forta.cf.org.mx/contacto, key: 709f4a65'
+            label: Link
+            name: 709f4a65
+            widget: string
+          - hint: 'Original link: #oferta, key: -14ef7ec'
+            label: Link
+            name: '-14ef7ec'
+            widget: string
+          - hint: 'Original link: https://cf.org.mx/, key: 1c7deb5e'
+            label: Link
+            name: 1c7deb5e
+            widget: string
+          - hint: >-
+              Original link:
+              https://archivos.cf.org.mx/170712%20Aviso%20de%20Privacidad%20CF%20%28WEBSITE%29.pdf,
+              key: 418b5433
+            label: Link
+            name: 418b5433
+            widget: string
+          - hint: >-
+              Original link:
+              https://accounts.google.com/signup/v2/webcreateaccount?continue=https%3A%2F%2Faccounts.google.com%2FManageAccount%3Fnc%3D1&dsh=S-905377245%3A1595276579909115&gmb=exp&biz=false&flowName=GlifWebSignIn&flowEntry=SignUp,
+              key: -55c68a6b
+            label: Link
+            name: '-55c68a6b'
+            widget: string
+          - hint: >-
+              Original link: https://classroom.google.com/u/0/h?hl=es, key:
+              2d82e73e
+            label: Link
+            name: 2d82e73e
+            widget: string
+          - hint: 'Original link: https://forta.cf.org.mx/#oferta, key: 13ee833e'
+            label: Link
+            name: 13ee833e
+            widget: string
+          - hint: 'Original link: #informacion, key: -7d67a926'
+            label: Link
+            name: '-7d67a926'
+            widget: string
+          - hint: 'Original link: #, key: 23'
+            label: Link
+            name: '23'
+            widget: string
+          - hint: 'Original link: http://forta.cf.org.mx, key: -33c2466a'
+            label: Link
+            name: '-33c2466a'
+            widget: string
+      - label: Images
+        name: images
+        file: cms/_data/images.json
+        fields:
+          - label: Title
+            name: title
+            widget: hidden
+            default: Images
+          - label: Image
+            name: i5fadfb53
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: i2b5af03f
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 5bf6b33c
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 2fde2b77
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: b386804
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: i848c631
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 53666b27
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: i3dbdecfb
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-4ade46f3'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-59bc174a'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 15cae763
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-47b2dc11'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
